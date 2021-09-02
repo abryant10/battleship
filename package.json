@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/abryant10/battleship#readme",
   "devDependencies": {
+    "css-loader": "^6.2.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",

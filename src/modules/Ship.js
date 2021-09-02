@@ -1,15 +1,16 @@
-const Ship = (XorY, length, position) => {
+const Ship = (XorY, long, position) => {
   const spots = [];
   const hits = [];
+  const shipLength = long;
   let sunk = false;
   let addSpot = position;
   if (XorY === 'x') {
-    for (let i = 0; i < length; i += 1) {
+    for (let i = 0; i < shipLength; i += 1) {
       spots.push(addSpot);
       addSpot += 1;
     }
   } else {
-    for (let i = 0; i < length; i += 1) {
+    for (let i = 0; i < shipLength; i += 1) {
       spots.push(addSpot);
       addSpot += 10;
     }
@@ -17,22 +18,25 @@ const Ship = (XorY, length, position) => {
   const hit = (number) => {
     hits.push(number);
   };
-  const isSunk = () => {
-    if (hits.length === length) {
-      sunk = true;
+  const didItSink = () => {
+    if (hits.length === shipLength) {
+      obj.sunk = true;
     }
   };
-  return {
+
+  const obj = {
     XorY,
-    length,
+    shipLength,
     position,
     spots,
     hits,
     hit,
+    didItSink,
     sunk,
-    isSunk,
   };
+  return obj;
 };
 
-// export default Ship;
-module.exports = Ship;
+console.log('ship');
+
+export default Ship;
