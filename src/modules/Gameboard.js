@@ -1,6 +1,6 @@
 import Ship from './Ship';
 
-const Gameboard = () => {
+const Gameboard = (player) => {
   const shipsOnThisBoard = [];
   const missedAttacks = [];
   const hitSpaces = [];
@@ -35,7 +35,7 @@ const Gameboard = () => {
   };
 
   return {
-    placeShip, receiveAttack, shipsOnThisBoard, missedAttacks, checkAllSunk,
+    player, placeShip, receiveAttack, shipsOnThisBoard, missedAttacks, checkAllSunk,
   };
 };
 console.log('gamebaord');

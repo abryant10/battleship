@@ -1,14 +1,16 @@
-// import css from './styles/styles.css';
+import './styles/styles.css';
 import Ship from './modules/Ship';
 import Player from './modules/Player';
 import Gameboard from './modules/Gameboard';
 import DOMinteraction from './modules/DOMinteraction';
 
+const DOM = DOMinteraction();
+
 const Game = () => {
   const playerOne = Player('human');
   const playerTwo = Player('computer');
-  const gameboardOne = Gameboard();
-  const gameboardTwo = Gameboard();
+  const gameboardOne = Gameboard(1);
+  const gameboardTwo = Gameboard(2);
 
   const pOneCarrier = Ship('x', 5, 95);
   const pOneBattleship = Ship('y', 4, 21);
@@ -29,9 +31,13 @@ const Game = () => {
   gameboardTwo.shipsOnThisBoard.push(
     pTwoCarrier, pTwoBattleship, pTwoDestroyer, pTwoSub, pTwoPatrol,
   );
+
+  DOM.makeBoard(1);
+  DOM.makeBoard(2);
+
+  DOM.renderBoardHuman(gameboardOne);
+  DOM.renderBoardHuman(gameboardTwo);
 };
-// set ships on GB 1
-// set ships one GB 2
 
 // gameloop
 // while (check for all ships sunk in gameboards)

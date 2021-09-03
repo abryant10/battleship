@@ -8,3 +8,8 @@ No.	Class of ship	Size
 3	Destroyer	3
 4	Submarine	3
 5	Patrol Boat	2
+
+
+- event listeners
+- game loop
+- 

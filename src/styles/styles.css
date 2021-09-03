@@ -29,3 +29,18 @@ header {
   height: 50%;
 
 }
+.boardContainer {
+ height: 80%;
+ width: 80%;
+ border: 1px solid black;
+ margin: auto;
+ display: grid;
+ grid-template-columns: repeat(10, auto);
+ gap: 0px;
+}
+.boardLocation {
+  border: 1px solid black;
+}
+.shipLocation {
+  background-color: black;
+}
