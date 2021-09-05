@@ -9,7 +9,10 @@ No.	Class of ship	Size
 4	Submarine	3
 5	Patrol Boat	2
 
-
-- event listeners
-- game loop
-- 
+- move game loop listener to index
+-computer smart?
+-new game
+-pick where ships go  
+  - use flag variables with event listeners to do this. 
+-computer random ships
+-gameover reveals comp ships

@@ -25,7 +25,7 @@ header {
   height: 50%;
 }
 .pTwoContainer {
-  background-color: brown;
+  background-color:green;
   height: 50%;
 
 }
@@ -40,7 +40,15 @@ header {
 }
 .boardLocation {
   border: 1px solid black;
+  cursor: pointer;
 }
 .shipLocation {
   background-color: black;
+}
+.missedAttack {
+  color: black;
+  background-color: grey;
+}
+.hitAttack {
+  background-color: red;
 }

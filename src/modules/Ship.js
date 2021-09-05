@@ -2,7 +2,7 @@ const Ship = (XorY, long, position) => {
   const spots = [];
   const hits = [];
   const shipLength = long;
-  let sunk = false;
+  const sunk = false;
   let addSpot = position;
   if (XorY === 'x') {
     for (let i = 0; i < shipLength; i += 1) {
@@ -36,7 +36,5 @@ const Ship = (XorY, long, position) => {
   };
   return obj;
 };
-
-console.log('ship');
 
 export default Ship;

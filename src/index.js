@@ -5,13 +5,11 @@ import Gameboard from './modules/Gameboard';
 import DOMinteraction from './modules/DOMinteraction';
 
 const DOM = DOMinteraction();
-
+const playerOne = Player('human');
+const playerTwo = Player('computer');
+const gameboardOne = Gameboard(1);
+const gameboardTwo = Gameboard(2);
 const Game = () => {
-  const playerOne = Player('human');
-  const playerTwo = Player('computer');
-  const gameboardOne = Gameboard(1);
-  const gameboardTwo = Gameboard(2);
-
   const pOneCarrier = Ship('x', 5, 95);
   const pOneBattleship = Ship('y', 4, 21);
   const pOneDestroyer = Ship('y', 3, 4);
@@ -35,10 +33,12 @@ const Game = () => {
   DOM.makeBoard(1);
   DOM.makeBoard(2);
 
-  DOM.renderBoardHuman(gameboardOne);
-  DOM.renderBoardHuman(gameboardTwo);
+  DOM.renderBoard(gameboardOne);
+  DOM.renderBoard(gameboardTwo);
 };
 
-// gameloop
-// while (check for all ships sunk in gameboards)
 Game();
+
+export {
+  gameboardOne, gameboardTwo, playerOne, playerTwo 
+};

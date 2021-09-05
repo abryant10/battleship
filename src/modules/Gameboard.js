@@ -10,7 +10,7 @@ const Gameboard = (player) => {
   const receiveAttack = (position) => {
     let hits = false;
     for (let i = 0; i < shipsOnThisBoard.length; i += 1) {
-      if (shipsOnThisBoard[i].spots.includes(position)) {
+      if (shipsOnThisBoard[i].spots.includes(parseInt(position, 10))) {
         shipsOnThisBoard[i].hit(position);
         hitSpaces.push(position);
         hits = true;
@@ -35,9 +35,8 @@ const Gameboard = (player) => {
   };
 
   return {
-    player, placeShip, receiveAttack, shipsOnThisBoard, missedAttacks, checkAllSunk,
+    player, placeShip, receiveAttack, shipsOnThisBoard, missedAttacks, hitSpaces, checkAllSunk,
   };
 };
-console.log('gamebaord');
 
 export default Gameboard;

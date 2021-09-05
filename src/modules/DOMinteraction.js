@@ -1,6 +1,8 @@
+import { gameboardOne, gameboardTwo, playerOne, playerTwo } from '../index';
+
+const pOneContainer = document.querySelector('.pOneContainer');
+const pTwoContainer = document.querySelector('.pTwoContainer');
 const DOMinteraction = () => {
-  const pOneContainer = document.querySelector('.pOneContainer');
-  const pTwoContainer = document.querySelector('.pTwoContainer');
   const makeBoard = (OneOrTwo) => {
     let gameboardLocation = pOneContainer;
     if (OneOrTwo === 2) {
@@ -16,31 +18,80 @@ const DOMinteraction = () => {
       boardContainer.appendChild(boardLocation);
     }
   };
-  const renderShips = (gamebaord) => {
+  const renderShips = (gameboard) => {
     let container = pOneContainer;
-    if (gamebaord.player === 2) {
+    if (gameboard.player === 2) {
       container = pTwoContainer;
     }
-    gamebaord.shipsOnThisBoard.forEach((ship) => {
+    gameboard.shipsOnThisBoard.forEach((ship) => {
       ship.spots.forEach((spot) => {
         const square = container.querySelector(`[data-number='${spot}']`);
         square.classList = 'boardLocation shipLocation';
       });
     });
   };
-  const renderBoardHuman = (gamebaord) => {
-    renderShips(gamebaord);
-    // renderHits(gamebaord);
-    // rednerMisses(gamebaord);
+  const renderHits = (gameboard) => {
+    let container = pOneContainer;
+    if (gameboard.player === 2) {
+      container = pTwoContainer;
+    }
+    if (gameboard.hitSpaces === []) return;
+    gameboard.hitSpaces.forEach((hit) => {
+      const square = container.querySelector(`[data-number='${hit}']`);
+      // square.innerHTML = '.';
+      square.classList = 'boardLocation shipLocation hitAttack';
+    });
   };
-  // const renderBoardComputer = (gamebaord) => {
-  //   renderHits(gamebaord);
-  //   rednerMisses(gamebaord);
-  // };
+  const renderMisses = (gameboard) => {
+    let container = pOneContainer;
+    if (gameboard.player === 2) {
+      container = pTwoContainer;
+    }
+    if (gameboard.missedAttacks === []) return;
+    gameboard.missedAttacks.forEach((miss) => {
+      const square = container.querySelector(`[data-number='${miss}']`);
+      // square.innerHTML = '.';
+      square.classList = 'boardLocation missedAttack';
+    });
+  };
+  const renderBoard = (gameboard) => {
+    if (gameboard.player === 1) {
+      renderShips(gameboard);
+    }
+    renderHits(gameboard);
+    renderMisses(gameboard);
+  };
+  const gameLoop = pTwoContainer.addEventListener('click', (event) => {
+    if (!event.target.matches('.boardLocation')) return;
+    if (!playerOne.myTurn) return;
+    if (event.target.matches('hitAttack')) return;
+    if (event.target.matches('missedAttack')) return;
+    playerOne.attack(gameboardTwo, event.target.dataset.number);
+    renderBoard(gameboardTwo);
+    gameboardTwo.shipsOnThisBoard.forEach((ship) => {
+      ship.didItSink();
+    });
+    // run did it sink on all ships
+    if (gameboardTwo.checkAllSunk()) {
+      alert('player one wins!');
+    } else {
+      playerTwo.randomAttack(gameboardOne);
+      renderBoard(gameboardOne);
+      gameboardOne.shipsOnThisBoard.forEach((ship) => {
+        ship.didItSink();
+      });
+      if (gameboardOne.checkAllSunk()) {
+        // show enemy ships here
+        alert('player two wins!');
+      } else {
+        playerOne.myTurn = true;
+      }
+    }
+  });
   return {
     makeBoard,
-    renderBoardHuman,
-    // renderBoardComputer,
+    renderBoard,
+    gameLoop,
   };
 };
 

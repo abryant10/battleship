@@ -1,8 +1,10 @@
 const Player = (name) => {
+  const myTurn = true;
   const playersMoves = [];
   const attack = (gameboard, position) => {
     gameboard.receiveAttack(position);
     playersMoves.push(position);
+    obj.myTurn = false;
   };
   const randomAttack = (gameboard) => {
     let filledSpace = true;
@@ -15,12 +17,13 @@ const Player = (name) => {
       }
     }
   };
-  return {
+  const obj = {
     name,
+    myTurn,
     attack,
     randomAttack,
   };
+  return obj;
 };
-console.log('player');
 
 export default Player;
