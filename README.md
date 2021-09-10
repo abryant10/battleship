@@ -1,7 +1,6 @@
 # battleship
 battleship game
 
-
 No.	Class of ship	Size
 1	Carrier	5
 2	Battleship	4
@@ -9,10 +8,9 @@ No.	Class of ship	Size
 4	Submarine	3
 5	Patrol Boat	2
 
-- move game loop listener to index
+-computer random ships
+
+-pick where ships go 
+  - show ship outlines
 -computer smart?
 -new game
--pick where ships go  
-  - use flag variables with event listeners to do this. 
--computer random ships
--gameover reveals comp ships

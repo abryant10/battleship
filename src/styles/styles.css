@@ -10,30 +10,36 @@ body {
   margin: 0;
 }
 header {
-  background-color: blue;
+  background-color: rgb(212, 212, 212);
   text-align: center;
   width: 100%;
-  height: 10%;
-  color: aliceblue;
+  height: 40px;
+  color: black;
+  font-size: 35px;
+  font-weight: bold;
 }
 .gameContainer {
   height: 90%;
   width: 100%;
 }
 .pOneContainer {
-  background-color: blueviolet;
-  height: 50%;
+  background-color: rgb(140, 121, 223);
+  height: 350px;
+}
+.playerName {
+  font-size: 20px;
+  font-weight: bold;
 }
 .pTwoContainer {
-  background-color:green;
-  height: 50%;
-
+  background-color:rgb(216, 191, 124);
+  height: 350px;
 }
 .boardContainer {
- height: 80%;
- width: 80%;
+ height: 230px; 
+ width: 230px;
  border: 1px solid black;
  margin: auto;
+ margin-top: 20px;
  display: grid;
  grid-template-columns: repeat(10, auto);
  gap: 0px;
@@ -52,3 +58,10 @@ header {
 .hitAttack {
   background-color: red;
 }
+
+@media only screen and (min-width: 800px) {
+  /* .boardContainer {
+    height: 330px;
+    width: 300px;
+   } */
+ }

@@ -10,22 +10,12 @@ const playerTwo = Player('computer');
 const gameboardOne = Gameboard(1);
 const gameboardTwo = Gameboard(2);
 const Game = () => {
-  const pOneCarrier = Ship('x', 5, 95);
-  const pOneBattleship = Ship('y', 4, 21);
-  const pOneDestroyer = Ship('y', 3, 4);
-  const pOneSub = Ship('x', 3, 26);
-  const pOnePatrol = Ship('y', 2, 56);
-
-  gameboardOne.shipsOnThisBoard.push(
-    pOneCarrier, pOneBattleship, pOneDestroyer, pOneSub, pOnePatrol,
-  );
-
-  const pTwoCarrier = Ship('x', 5, 95);
-  const pTwoBattleship = Ship('y', 4, 21);
-  const pTwoDestroyer = Ship('y', 3, 4);
-  const pTwoSub = Ship('x', 3, 26);
-  const pTwoPatrol = Ship('y', 2, 56);
-
+  // const pTwoCarrier = Ship('x', 5, 95);
+  // const pTwoBattleship = Ship('y', 4, 21);
+  // const pTwoDestroyer = Ship('y', 3, 4);
+  // const pTwoSub = Ship('x', 3, 26);
+  // const pTwoPatrol = Ship('y', 2, 56);
+  randomComputerShips();
   gameboardTwo.shipsOnThisBoard.push(
     pTwoCarrier, pTwoBattleship, pTwoDestroyer, pTwoSub, pTwoPatrol,
   );
@@ -35,10 +25,12 @@ const Game = () => {
 
   DOM.renderBoard(gameboardOne);
   DOM.renderBoard(gameboardTwo);
+
+  DOM.startGameLoop();
 };
 
 Game();
 
 export {
-  gameboardOne, gameboardTwo, playerOne, playerTwo 
+  gameboardOne, gameboardTwo, playerOne, playerTwo,
 };
