@@ -51,6 +51,12 @@ header {
 .shipLocation {
   background-color: black;
 }
+.shipLocationCheck {
+  background-color: rgb(49, 49, 49);
+}
+.shipLocationBad {
+  background-color: red;
+}
 .missedAttack {
   color: black;
   background-color: grey;

@@ -8,9 +8,9 @@ No.	Class of ship	Size
 4	Submarine	3
 5	Patrol Boat	2
 
--computer random ships
 
 -pick where ships go 
-  - show ship outlines
+  - show ship outlines - make reusable function
 -computer smart?
 -new game
+- alert player that a ship is sunk
