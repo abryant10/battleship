@@ -81,14 +81,66 @@ const renderMisses = (gameboard) => {
   });
 };
 const renderBoard = (gameboard) => {
-  if (gameboard.player === 1) {
+  // if (gameboard.player === 1) {
     renderShips(gameboard);
-  }
+  // }
   renderHits(gameboard);
   renderMisses(gameboard);
 };
-
+const shipHover = function shipHover(event, flagVariable, numberOfSpots, badSpotsX, notOverY) {
+  if (!event.target.matches('.boardLocation')) return;
+  if (!flagVariable) return;
+  const spot = parseInt(event.target.dataset.number, 10);
+  const shipOutline = [];
+  if (placeXorY === 'x') {
+    for (let i = 0; i < numberOfSpots; i += 1) {
+      const addedSpot = document.querySelector(`[data-number='${spot + i}']`);
+      shipOutline.push(addedSpot);
+    }
+    if (playerOne.checkShipIntersection('x', spot, numberOfSpots, gameboardOne)) {
+      shipOutline.forEach((location) => {
+        location.classList.add('shipLocationBad');
+      });
+    }
+    if (badSpotsX.includes(spot)) {
+      shipOutline.forEach((location) => {
+        location.classList.add('shipLocationBad');
+      });
+    } else {
+      shipOutline.forEach((location) => {
+        location.classList.add('shipLocationCheck');
+      });
+    }
+  }
+  if (placeXorY === 'y') {
+    for (let i = 0; i < numberOfSpots; i += 1) {
+      const addedSpot = document.querySelector(`[data-number='${spot + (i * 10)}']`);
+      shipOutline.push(addedSpot);
+    }
+    if (playerOne.checkShipIntersection('y', spot, numberOfSpots, gameboardOne)) {
+      shipOutline.forEach((location) => {
+        location.classList.add('shipLocationBad');
+      });
+    }
+    if (spot < notOverY) {
+      shipOutline.forEach((location) => {
+        location.classList.add('shipLocationCheck');
+      });
+    } else {
+      shipOutline.forEach((location) => {
+        location.classList.add('shipLocationBad');
+      });
+    }
+  }
+};
+// const reportShipSunk = function (player, ship) {
+//   playerMessages.innerHTML = `${player}'s `
+//   ship.changeReportSunk();
+// }
 // place patrol
+pOneContainer.addEventListener('mouseover', (event) => {
+  shipHover(event, placePatrolTime, 2, patrolForbidSpotsX, patrolForbidGraterY);
+});
 pOneContainer.addEventListener('click', (event) => {
   if (!event.target.matches('.boardLocation')) return;
   if (!placePatrolTime) return;
@@ -96,13 +148,13 @@ pOneContainer.addEventListener('click', (event) => {
   if (playerOne.checkShipIntersection(placeXorY, spot, 2, gameboardOne)) return;
   if (placeXorY === 'x') {
     if ([10, 20, 30, 40, 50, 60, 70, 80, 90, 100].includes(spot)) return;
-    const pOnePatrol = Ship('x', 2, spot);
+    const pOnePatrol = Ship('x', 2, spot, 'Patrol Ship');
     gameboardOne.shipsOnThisBoard.push(pOnePatrol);
     renderBoard(gameboardOne);
     placePatrolTime = false;
   } else {
     if (spot > 91) return;
-    const pOnePatrol = Ship('y', 2, spot);
+    const pOnePatrol = Ship('y', 2, spot, 'Patrol Ship');
     gameboardOne.shipsOnThisBoard.push(pOnePatrol);
     renderBoard(gameboardOne);
     placePatrolTime = false;
@@ -112,6 +164,9 @@ pOneContainer.addEventListener('click', (event) => {
   setTimeout(() => { playerMessages.innerHTML = ''; }, 5000);
 });
 // place Submarine
+pOneContainer.addEventListener('mouseover', (event) => {
+  shipHover(event, placeSubmarineTime, 3, subForbidSpotsX, subForbidGraterY);
+});
 pOneContainer.addEventListener('click', (event) => {
   if (!event.target.matches('.boardLocation')) return;
   if (!placeSubmarineTime) return;
@@ -124,23 +179,26 @@ pOneContainer.addEventListener('click', (event) => {
       59, 60, 69, 70,
       79, 80, 89, 90,
       99, 100].includes(spot)) return;
-    const pOneSub = Ship('x', 3, spot);
+    const pOneSub = Ship('x', 3, spot, 'Submarine');
     gameboardOne.shipsOnThisBoard.push(pOneSub);
     renderBoard(gameboardOne);
     placeSubmarineTime = false;
     placePatrolTime = true;
   } else {
     if (spot > 81) return;
-    const pOneSub = Ship('y', 3, spot);
+    const pOneSub = Ship('y', 3, spot, 'Submarine');
     gameboardOne.shipsOnThisBoard.push(pOneSub);
     renderBoard(gameboardOne);
     placeSubmarineTime = false;
     placePatrolTime = true;
   }
   playerMessages.innerHTML = `Choose where to place your Patrol Ship. 
-  Press 'x' or 'y' to change orientation.`;
+  Press the x or y key to change the ship's orientation.`;
 });
 // place destroyer
+pOneContainer.addEventListener('mouseover', (event) => {
+  shipHover(event, placeDestroyerTime, 3, destroyerForbidSpotsX, destroyerForbidGraterY);
+});
 pOneContainer.addEventListener('click', (event) => {
   if (!event.target.matches('.boardLocation')) return;
   if (!placeDestroyerTime) return;
@@ -153,23 +211,26 @@ pOneContainer.addEventListener('click', (event) => {
       59, 60, 69, 70,
       79, 80, 89, 90,
       99, 100].includes(spot)) return;
-    const pOneDestroyer = Ship('x', 3, spot);
+    const pOneDestroyer = Ship('x', 3, spot, 'Destroyer');
     gameboardOne.shipsOnThisBoard.push(pOneDestroyer);
     renderBoard(gameboardOne);
     placeDestroyerTime = false;
     placeSubmarineTime = true;
   } else {
     if (spot > 81) return;
-    const pOneDestroyer = Ship('y', 3, spot);
+    const pOneDestroyer = Ship('y', 3, spot, 'Destroyer');
     gameboardOne.shipsOnThisBoard.push(pOneDestroyer);
     renderBoard(gameboardOne);
     placeDestroyerTime = false;
     placeSubmarineTime = true;
   }
   playerMessages.innerHTML = `Choose where to place your Submarine. 
-  Press 'x' or 'y' to change orientation.`;
+  Press the x or y key to change the ship's orientation.`;
 });
 // place battleship
+pOneContainer.addEventListener('mouseover', (event) => {
+  shipHover(event, placeBattleshipTime, 4, battleForbidSpotsX, battleForbidGraterY);
+});
 pOneContainer.addEventListener('click', (event) => {
   if (!event.target.matches('.boardLocation')) return;
   if (!placeBattleshipTime) return;
@@ -182,74 +243,25 @@ pOneContainer.addEventListener('click', (event) => {
       59, 60, 68, 69, 70,
       78, 79, 80, 88, 89, 90,
       98, 99, 100].includes(spot)) return;
-    const pOneBattleship = Ship('x', 4, spot);
+    const pOneBattleship = Ship('x', 4, spot, 'Battleship');
     gameboardOne.shipsOnThisBoard.push(pOneBattleship);
     renderBoard(gameboardOne);
     placeBattleshipTime = false;
     placeDestroyerTime = true;
   } else {
     if (spot > 71) return;
-    const pOneBattleship = Ship('y', 4, spot);
+    const pOneBattleship = Ship('y', 4, spot, 'Battleship');
     gameboardOne.shipsOnThisBoard.push(pOneBattleship);
     renderBoard(gameboardOne);
     placeBattleshipTime = false;
     placeDestroyerTime = true;
   }
   playerMessages.innerHTML = `Choose where to place your Destroyer. 
-  Press 'x' or 'y' to change orientation.`;
+  Press the x or y key to change the ship's orientation.`;
 });
 // place carrier ship
 pOneContainer.addEventListener('mouseover', (event) => {
-  //make a function here
-
-  // fucntion (event, flagvariable, how many spots, noGoXArray, notOverY,)/////////////////////////////////////
-  if (!event.target.matches('.boardLocation')) return;
-  if (!placeCarrierTime) return;
-  const spot = parseInt(event.target.dataset.number, 10);
-  const spotOne = event.target;
-  if (placeXorY === 'x') {
-    const spotTwo = document.querySelector(`[data-number='${spot + 1}']`);
-    const spotThree = document.querySelector(`[data-number='${spot + 2}']`);
-    const spotFour = document.querySelector(`[data-number='${spot + 3}']`);
-    const spotFive = document.querySelector(`[data-number='${spot + 4}']`);
-    if ([7, 8, 9, 10, 17, 18, 19, 20,
-      27, 28, 29, 30, 37, 38, 39,
-      40, 47, 48, 49, 50, 57, 58,
-      59, 60, 67, 68, 69, 70, 77,
-      78, 79, 80, 87, 88, 89, 90,
-      97, 98, 99, 100].includes(spot)) {
-      spotOne.classList = 'boardLocation shipLocationBad';
-      spotTwo.classList = 'boardLocation shipLocationBad';
-      spotThree.classList = 'boardLocation shipLocationBad';
-      spotFour.classList = 'boardLocation shipLocationBad';
-      spotFive.classList = 'boardLocation shipLocationBad';
-    } else {
-      spotOne.classList = 'boardLocation shipLocationCheck';
-      spotTwo.classList = 'boardLocation shipLocationCheck';
-      spotThree.classList = 'boardLocation shipLocationCheck';
-      spotFour.classList = 'boardLocation shipLocationCheck';
-      spotFive.classList = 'boardLocation shipLocationCheck';
-    }
-  }
-  if (placeXorY === 'y') {
-    const spotTwo = document.querySelector(`[data-number='${spot + 10}']`);
-    const spotThree = document.querySelector(`[data-number='${spot + 20}']`);
-    const spotFour = document.querySelector(`[data-number='${spot + 30}']`);
-    const spotFive = document.querySelector(`[data-number='${spot + 40}']`);
-    if (spot > 60) {
-      spotOne.classList = 'boardLocation shipLocationBad';
-      spotTwo.classList = 'boardLocation shipLocationBad';
-      spotThree.classList = 'boardLocation shipLocationBad';
-      spotFour.classList = 'boardLocation shipLocationBad';
-      spotFive.classList = 'boardLocation shipLocationBad';
-    } else {
-      spotOne.classList = 'boardLocation shipLocationCheck';
-      spotTwo.classList = 'boardLocation shipLocationCheck';
-      spotThree.classList = 'boardLocation shipLocationCheck';
-      spotFour.classList = 'boardLocation shipLocationCheck';
-      spotFive.classList = 'boardLocation shipLocationCheck';
-    }
-  }
+  shipHover(event, placeCarrierTime, 5, carrierForbidSpotsX, carrierForbidGraterY);
 });
 pOneContainer.addEventListener('mouseout', (event) => {
   if (!event.target.matches('.boardLocation')) return;
@@ -271,26 +283,25 @@ pOneContainer.addEventListener('click', (event) => {
       59, 60, 67, 68, 69, 70, 77,
       78, 79, 80, 87, 88, 89, 90,
       97, 98, 99, 100].includes(spot)) return;
-    const pOneCarrier = Ship('x', 5, spot);
+    const pOneCarrier = Ship('x', 5, spot, 'Carrier');
     gameboardOne.shipsOnThisBoard.push(pOneCarrier);
     renderBoard(gameboardOne);
     placeCarrierTime = false;
     placeBattleshipTime = true;
   } else {
     if (spot > 61) return;
-    const pOneCarrier = Ship('y', 5, spot);
+    const pOneCarrier = Ship('y', 5, spot, 'Carrier');
     gameboardOne.shipsOnThisBoard.push(pOneCarrier);
     renderBoard(gameboardOne);
     placeCarrierTime = false;
     placeBattleshipTime = true;
   }
   playerMessages.innerHTML = `Choose where to place your Battleship. 
-  Press 'x' or 'y' to change orientation.`;
+  Press the x or y key to change the ship's orientation.`;
 });
 
 // game loop
 const playerPlay = pTwoContainer.addEventListener('click', (event) => {
-  console.log(gameLoopTime);
   if (!gameLoopTime) return;
   if (!event.target.matches('.boardLocation')) return;
   if (!playerOne.myTurn) return;
@@ -301,17 +312,28 @@ const playerPlay = pTwoContainer.addEventListener('click', (event) => {
   gameboardTwo.shipsOnThisBoard.forEach((ship) => {
     ship.didItSink();
   });
+  // for each ship on GB2 check if sunk and if not reported and report if so.
+  gameboardTwo.shipsOnThisBoard.forEach((ship) => {
+    if (ship.sunk) {
+      if (!ship.reportedSunk) {
+        playerMessages.innerHTML = ``;///////////////////////////////////////////////////////////////////////
+        ship.changeReportedSunk();
+        setTimeout(playerMessages.innerHTML = '';/////////////////////////////////////////////////////////////////////// set timout 5 seconds
+      }
+    }
+  });
   if (gameboardTwo.checkAllSunk()) {
-    alert('player one wins!');
+    alert('player one wins! Press Esc to play again.');
   } else {
     playerTwo.randomAttack(gameboardOne);
     renderBoard(gameboardOne);
     gameboardOne.shipsOnThisBoard.forEach((ship) => {
       ship.didItSink();
     });
+    // for each ship on GB1 check if sunk and if not reported and report if so.
     if (gameboardOne.checkAllSunk()) {
       renderShips(gameboardTwo);
-      alert('player two wins!');
+      alert('player two wins! Press Esc to play again.');
     } else {
       playerOne.myTurn = true;
     }

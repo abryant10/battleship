@@ -3,7 +3,6 @@ import Player from './modules/Player';
 import Gameboard from './modules/Gameboard';
 import { makeBoard, renderBoard } from './modules/DOMinteraction';
 
-// const DOM = DOMinteraction();
 const playerOne = Player('human');
 const playerTwo = Player('computer');
 const gameboardOne = Gameboard(1);

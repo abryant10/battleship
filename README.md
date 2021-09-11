@@ -10,7 +10,7 @@ No.	Class of ship	Size
 
 
 -pick where ships go 
-  - show ship outlines - make reusable function
+  - show ship outlines - test reusable function
 -computer smart?
 -new game
 - alert player that a ship is sunk

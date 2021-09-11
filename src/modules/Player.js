@@ -43,7 +43,7 @@ const Player = (name) => {
     }
     return false;
   };
-  const randomShip = function randomShip(forbidSpotsX, forbidGraterY, shipLength, gameboard) {
+  const randomShip = function randomShip(forbidSpotsX, forbidGraterY, shipLength, gameboard, name) {
     let shipPlaced = false;
     let XorY = 'x';
     let number;
@@ -67,7 +67,7 @@ const Player = (name) => {
         }
       }
     }
-    const ship = Ship(XorY, shipLength, number);
+    const ship = Ship(XorY, shipLength, number, name);
     return ship;
   };
   const randomComputerShips = function randomComputerShips(player, gameboard) {
@@ -85,22 +85,22 @@ const Player = (name) => {
     const destroyerForbidGraterY = 81;
     const subForbidGraterY = 81;
     const patrolForbidGraterY = 91;
-    const pTwoCarrier = player.randomShip(
-      carrierForbidSpotsX, carrierForbidGraterY, 5, gameboard,
+    const pTwoCarrier = randomShip(
+      carrierForbidSpotsX, carrierForbidGraterY, 5, gameboard, 'Carrier',
     );
     gameboard.shipsOnThisBoard.push(pTwoCarrier);
-    const pTwoBattleship = player.randomShip(
-      battleForbidSpotsX, battleForbidGraterY, 4, gameboard,
+    const pTwoBattleship = randomShip(
+      battleForbidSpotsX, battleForbidGraterY, 4, gameboard, 'Battleship',
     );
     gameboard.shipsOnThisBoard.push(pTwoBattleship);
-    const pTwoDestroyer = player.randomShip(
-      destroyerForbidSpotsX, destroyerForbidGraterY, 3, gameboard,
+    const pTwoDestroyer = randomShip(
+      destroyerForbidSpotsX, destroyerForbidGraterY, 3, gameboard, 'Destroyer',
     );
     gameboard.shipsOnThisBoard.push(pTwoDestroyer);
-    const pTwoSub = player.randomShip(subForbidSpotsX, subForbidGraterY, 3, gameboard);
+    const pTwoSub = randomShip(subForbidSpotsX, subForbidGraterY, 3, gameboard, 'Submarine');
     gameboard.shipsOnThisBoard.push(pTwoSub);
-    const pTwoPatrol = player.randomShip(
-      patrolForbidSpotsX, patrolForbidGraterY, 2, gameboard,
+    const pTwoPatrol = randomShip(
+      patrolForbidSpotsX, patrolForbidGraterY, 2, gameboard, 'Patrol Ship',
     );
     gameboard.shipsOnThisBoard.push(pTwoPatrol);
   };

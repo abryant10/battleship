@@ -23,16 +23,20 @@ header {
   width: 100%;
 }
 .pOneContainer {
-  background-color: rgb(140, 121, 223);
+  background-color: rgb(226, 226, 226);
   height: 350px;
 }
 .playerName {
   font-size: 20px;
   font-weight: bold;
 }
+.playerMessages {
+  text-align: center;
+}
 .pTwoContainer {
-  background-color:rgb(216, 191, 124);
+  background-color: rgb(226, 226, 226);
   height: 350px;
+  border-top: 4px solid black;
 }
 .boardContainer {
  height: 230px; 
@@ -47,6 +51,7 @@ header {
 .boardLocation {
   border: 1px solid black;
   cursor: pointer;
+  background-color: rgb(107, 107, 241);
 }
 .shipLocation {
   background-color: black;
