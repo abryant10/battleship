@@ -29,6 +29,7 @@ header {
 .playerName {
   font-size: 20px;
   font-weight: bold;
+  text-align: center;
 }
 .playerMessages {
   text-align: center;

@@ -10,7 +10,7 @@ const gameboardTwo = Gameboard(2);
 const Game = () => {
   makeBoard(1);
   makeBoard(2);
-  playerTwo.randomComputerShips(playerTwo, gameboardTwo);
+  playerTwo.randomComputerShips(gameboardTwo);
   renderBoard(gameboardOne);
   renderBoard(gameboardTwo);
 };

@@ -81,9 +81,9 @@ const renderMisses = (gameboard) => {
   });
 };
 const renderBoard = (gameboard) => {
-  // if (gameboard.player === 1) {
+  if (gameboard.player === 1) {
     renderShips(gameboard);
-  // }
+  }
   renderHits(gameboard);
   renderMisses(gameboard);
 };
@@ -312,13 +312,12 @@ const playerPlay = pTwoContainer.addEventListener('click', (event) => {
   gameboardTwo.shipsOnThisBoard.forEach((ship) => {
     ship.didItSink();
   });
-  // for each ship on GB2 check if sunk and if not reported and report if so.
   gameboardTwo.shipsOnThisBoard.forEach((ship) => {
     if (ship.sunk) {
       if (!ship.reportedSunk) {
-        playerMessages.innerHTML = ``;///////////////////////////////////////////////////////////////////////
+        playerMessages.innerHTML = `Computer's ${ship.name} sunk!`;
         ship.changeReportedSunk();
-        setTimeout(playerMessages.innerHTML = '';/////////////////////////////////////////////////////////////////////// set timout 5 seconds
+        setTimeout(() => { playerMessages.innerHTML = ''; }, 5000);
       }
     }
   });
@@ -330,7 +329,6 @@ const playerPlay = pTwoContainer.addEventListener('click', (event) => {
     gameboardOne.shipsOnThisBoard.forEach((ship) => {
       ship.didItSink();
     });
-    // for each ship on GB1 check if sunk and if not reported and report if so.
     if (gameboardOne.checkAllSunk()) {
       renderShips(gameboardTwo);
       alert('player two wins! Press Esc to play again.');

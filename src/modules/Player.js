@@ -43,7 +43,9 @@ const Player = (name) => {
     }
     return false;
   };
-  const randomShip = function randomShip(forbidSpotsX, forbidGraterY, shipLength, gameboard, name) {
+  const randomShip = function randomShip(
+    forbidSpotsX, forbidGraterY, shipLength, gameboard, shipName,
+  ) {
     let shipPlaced = false;
     let XorY = 'x';
     let number;
@@ -67,10 +69,10 @@ const Player = (name) => {
         }
       }
     }
-    const ship = Ship(XorY, shipLength, number, name);
+    const ship = Ship(XorY, shipLength, number, shipName);
     return ship;
   };
-  const randomComputerShips = function randomComputerShips(player, gameboard) {
+  const randomComputerShips = function randomComputerShips(gameboard) {
     const carrierForbidSpotsX = [7, 8, 9, 10, 17, 18, 19, 20,
       27, 28, 29, 30, 37, 38, 39, 40, 47, 48, 49, 50, 57, 58, 59, 60, 67, 68, 69, 70, 77,
       78, 79, 80, 87, 88, 89, 90, 97, 98, 99, 100];

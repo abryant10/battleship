@@ -3,7 +3,7 @@ const Ship = (XorY, long, position, name) => {
   const hits = [];
   const shipLength = long;
   const sunk = false;
-  let reportedSunk = false;
+  const reportedSunk = false;
   let addSpot = position;
   if (XorY === 'x') {
     for (let i = 0; i < shipLength; i += 1) {
@@ -25,7 +25,7 @@ const Ship = (XorY, long, position, name) => {
     }
   };
   const changeReportedSunk = () => {
-    reportedSunk = true;
+    obj.reportedSunk = true;
   };
 
   const obj = {
